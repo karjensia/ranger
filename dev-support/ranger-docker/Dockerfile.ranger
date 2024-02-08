@@ -42,9 +42,10 @@ COPY ./downloads/postgresql-42.2.16.jre7.jar      /home/ranger/dist/
 RUN mv /home/ranger/dist/postgresql-42.2.16.jre7.jar /usr/share/java/postgresql.jar
 
 FROM ranger AS ranger_mysql
-COPY ./downloads/mysql-connector-java-8.0.28.jar  /home/ranger/dist/
+COPY ./downloads/mysql-connector-java-5.1.31.jar  /home/ranger/dist/
 COPY ./downloads/log4jdbc-1.2.jar                 /home/ranger/dist/
-RUN mv /home/ranger/dist/log4jdbc-1.2.jar ${RANGER_HOME}/admin/ews/webapp/WEB-INF/lib/log4jdbc-1.2.jar
+RUN     mv /home/ranger/dist/mysql-connector-java-8.0.28.jar /usr/share/java/mysql-connector.jar \
+     && mv /home/ranger/dist/log4jdbc-1.2.jar ${RANGER_HOME}/admin/ews/webapp/WEB-INF/lib/log4jdbc-1.2.jar
 
 FROM ranger_${RANGER_DB_TYPE}
 
